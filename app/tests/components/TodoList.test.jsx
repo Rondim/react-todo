@@ -46,7 +46,11 @@ describe('TodoList', () => {
 
   it('should render empty message if no todos', () => {
     var todos = [];
-    var todoList = TestUtils.renderIntoDocument(<TodoList todos={todos}/>);
+    var store = configure({todos});
+    var provider = TestUtils.renderIntoDocument(<Provider store={store}>
+      <ConnectedTodoList/>
+    </Provider>);
+    var todoList = TestUtils.scryRenderedComponentsWithType(provider, ConnectedTodoList)[0];
     var $el = $(ReactDOM.findDOMNode(todoList));
 
     expect($el.find('.container__message').length).toBe(1);
