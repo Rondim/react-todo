@@ -82,4 +82,26 @@ describe('Reducer', () => {
       expect(res[0]).toEqual(todos[0]);
     });
   });
+
+  describe('authReducer', () => {
+    it('should login user', () => {
+      var action = {
+        type: 'LOGIN',
+
+      };
+      var auth = {};
+      var res = reducers.authReducer(df(auth), df(action));
+      expect(res).toEqual({uid: action.uid});
+    });
+    it('should logout user', () => {
+      var action = {
+        type: 'LOGOUT'
+      };
+      var auth = {
+        uid: 'asdkjfldfsdf'
+      };
+      var res = reducers.authReducer(df(auth), df(action));
+      expect(res).toEqual({});
+    });
+  });
 });
